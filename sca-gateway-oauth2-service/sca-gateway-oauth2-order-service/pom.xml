@@ -20,7 +20,7 @@
   <dependencies>
     <!-- 引入 mvc-config， 变成 web 应用 -->
     <dependency>
-      <artifactId>sca-gateway-oauth2</artifactId>
+      <artifactId>sca-gateway-oauth2-mvc-config</artifactId>
       <groupId>com.edcode.commerce</groupId>
       <version>1.0-SNAPSHOT</version>
     </dependency>

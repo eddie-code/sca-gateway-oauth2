@@ -1,13 +1,13 @@
 server:
   port: 9080
 
-security:
-  oauth2:
-    resource:
-      jwt:
-        # TokenKeyEndpoint 源码
-        key-uri: http://127.0.0.1:9090/oauth/token_key
-    client:
-      # 对应 oauth_client_details 的 orderService 的记录
-      client-id: orderService
-      client-secret: 123456
+#security:
+#  oauth2:
+#    resource:
+#      jwt:
+#        # TokenKeyEndpoint 源码
+#        key-uri: http://127.0.0.1:9090/oauth/token_key
+#    client:
+#      # 对应 oauth_client_details 的 orderService 的记录
+#      client-id: orderService
+#      client-secret: 123456
