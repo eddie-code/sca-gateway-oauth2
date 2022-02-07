@@ -1,16 +1,21 @@
 package com.edcode.commerce.security.server.auth;
 
+import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 /**
  * @author eddie.lee
@@ -25,10 +30,12 @@ public class Oauth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
   private AuthenticationManager authenticationManager;
 
   @Autowired
-  private UserDetailsService userDetailsService;
+  private DataSource dataSource;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+  @Bean
+  public TokenStore tokenStore() {
+    return new JdbcTokenStore(dataSource);
+  }
 
   /**
    * 检查服务的访问规则:
@@ -39,8 +46,7 @@ public class Oauth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
    */
   @Override
   public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-    security
-        .checkTokenAccess("isAuthenticated()");
+    security.checkTokenAccess("isAuthenticated()");
   }
 
   /**
@@ -51,33 +57,7 @@ public class Oauth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
    */
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    clients.inMemory()
-        // 客户端id
-        .withClient("orderApp")
-        // 客户端密码
-        .secret(passwordEncoder.encode("123456"))
-        // 该客户端允许授权的范围
-        .scopes("read", "write")
-        // 该客户端允许授权的时间为一小时
-        .accessTokenValiditySeconds(3600)
-        // 资源服务器的id: 逗号分隔
-        .resourceIds("order-server")
-        // 该客户端允许授权的类型 "authorization_code", "password", "client_credentials", "implicit", "refresh_token"
-				.authorizedGrantTypes("password")
-
-        .and()
-        // 客户端id
-        .withClient("orderService")
-        // 客户端密码
-        .secret(passwordEncoder.encode("123456"))
-        // 该客户端允许授权的范围
-        .scopes("read")
-        // 该客户端允许授权的时间为一小时
-        .accessTokenValiditySeconds(3600)
-        // 资源服务器的id: 逗号分隔
-        .resourceIds("order-server")
-        // 该客户端允许授权的类型 "authorization_code", "password", "client_credentials", "implicit", "refresh_token"
-        .authorizedGrantTypes("password");
+    clients.jdbc(dataSource);
   }
 
   /**
@@ -89,8 +69,15 @@ public class Oauth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
     endpoints
-        .userDetailsService(userDetailsService)
+        .tokenStore(tokenStore())
         .authenticationManager(authenticationManager);
   }
+
+  /**
+   * $2a$10$w274e5MEY/42JCQOzjrm8OkC.U83OshSKrWWIOCLZTkB/RTbuJKta
+   */
+//  public static void main(String[] args) {
+//    System.out.println(new BCryptPasswordEncoder().encode("123456"));
+//  }
 
 }
