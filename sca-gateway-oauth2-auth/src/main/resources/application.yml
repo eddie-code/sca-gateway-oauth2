@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: auth-serivce
+#  datasource:
+#    # 数据源
+#    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:oauth2}?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false
+#    username: ${MYSQL_USERNAME:root}
+#    password: ${MYSQL_PASSWORD:123456}
+#    type: com.zaxxer.hikari.HikariDataSource
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    # 连接池
+#    hikari:
+#      maximum-pool-size: 8
+#      minimum-idle: 4
+#      idle-timeout: 30000
+#      connection-timeout: 30000
+#      max-lifetime: 45000
+#      auto-commit: true
+#      pool-name: ScaCommerceHikariCP
+
+server:
+  port: 9090

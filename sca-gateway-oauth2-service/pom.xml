@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>sca-gateway-oauth2</artifactId>
+    <groupId>com.edcode.commerce</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>sca-gateway-oauth2-service</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>sca-gateway-oauth2-order-service</module>
+    <module>sca-gateway-oauth2-product-service</module>
+    <module>sca-gateway-oauth2-user-service</module>
+  </modules>
+  <packaging>pom</packaging> <!-- 父模块不能 jar 只能是 pom -->
+
+  <!-- 模块名及描述信息 -->
+  <name>sca-gateway-oauth2-service</name>
+  <description>电商服务模块父模块</description>
+
+  <dependencies>
+    <!-- swagger 用于定义 API 文档 -->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <!-- 美化 swagger -->
+    <dependency>
+      <groupId>com.github.xiaoymin</groupId>
+      <artifactId>swagger-bootstrap-ui</artifactId>
+      <version>1.9.6</version>
+    </dependency>
+  </dependencies>
+
+</project>

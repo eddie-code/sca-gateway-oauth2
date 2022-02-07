@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: user-service
+  datasource:
+    # 数据源
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:sca_commerce}?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:123456}
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 连接池
+    hikari:
+      maximum-pool-size: 8
+      minimum-idle: 4
+      idle-timeout: 30000
+      connection-timeout: 30000
+      max-lifetime: 45000
+      auto-commit: true
+      pool-name: ScaCommerceHikariCP
+  jpa:
+    generate-ddl: true # 根据实体自动新建表， 生产不要使用
+    show-sql: true # 打印sql
+server:
+  ssl:
+    key-store: D:\Develop\Mine\IdeaProjects\sca-gateway-oauth2\sca-gateway-oauth2-service\sca-gateway-oauth2-user-service\src\main\resources\eddie.key
+    key-store-password: 123456
+    key-password: 123456
