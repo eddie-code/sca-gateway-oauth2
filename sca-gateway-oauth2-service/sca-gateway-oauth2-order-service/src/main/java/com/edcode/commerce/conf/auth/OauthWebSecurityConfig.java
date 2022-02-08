@@ -20,8 +20,8 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
  * @date 2022-02-07 22:53
  * @description
  */
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class OauthWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired

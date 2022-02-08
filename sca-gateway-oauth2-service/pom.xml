@@ -13,7 +13,6 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>sca-gateway-oauth2-order-service</module>
-    <module>sca-gateway-oauth2-product-service</module>
     <module>sca-gateway-oauth2-user-service</module>
   </modules>
   <packaging>pom</packaging> <!-- 父模块不能 jar 只能是 pom -->
