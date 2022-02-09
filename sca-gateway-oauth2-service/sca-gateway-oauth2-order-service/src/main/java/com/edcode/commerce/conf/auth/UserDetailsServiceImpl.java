@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @date 2022-02-07 23:15
  * @description
  */
-//@Component
+@Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
   @Override
