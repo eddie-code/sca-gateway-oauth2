@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @date 2022-01-29 22:22
  * @description 认证启动类
  */
+@EnableDiscoveryClient
 @SpringBootApplication
 public class AuthServerApplication {
   public static void main(String[] args) {

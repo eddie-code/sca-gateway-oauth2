@@ -1,6 +1,18 @@
 spring:
   application:
     name: auth-serivce
+  main:
+    allow-bean-definition-overriding: true  # 因为将来会引入很多依赖, 难免有重名的 bean
+  cloud:
+    nacos:
+      # 服务注册发现
+      discovery:
+        enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
+        server-addr: ${NACOS_ADDR:127.0.0.1}:8848
+        namespace: ${NAMESPACE_ID:ded4d0b7-30c5-46b2-b2ac-08307547f712}
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
   datasource:
     # 数据源
     url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:oauth2}?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false

@@ -65,6 +65,12 @@
         <artifactId>fastjson</artifactId>
         <version>1.2.47</version>
       </dependency>
+      <!-- spring cloud alibaba nacos discovery 依赖 -->
+      <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        <version>2.2.3.RELEASE</version>
+      </dependency>
     </dependencies>
 
   <!--

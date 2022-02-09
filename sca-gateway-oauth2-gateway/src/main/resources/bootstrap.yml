@@ -18,17 +18,30 @@ spring:
         metadata:
           management:
             context-path: ${server.servlet.context-path}/actuator
-  # 静态路由
+  # 静态路由（讨个方便，后续有时间在搞动态）
     gateway:
       routes:
+        # http://localhost:9001/163
+        - id: 163_route # 路由的ID
+          uri: http://www.163.com/ # 匹配后路由地址
+          predicates: # 断言, 路径相匹配的进行路由
+            - Path=/163
+          filters:
+            - StripPrefix=1
+        # http://localhost:9001/auth-serivce/oauth/token
         - id: auth_route # 路由的ID
           uri: lb://auth-serivce # 匹配后路由地址
           predicates: # 断言, 路径相匹配的进行路由
-            - Path=/oauth/**
+            - Path=/auth-serivce/**
+          filters:
+            - StripPrefix=1
+        # http://localhost:9001/order-service/orders
         - id: order_route # 路由的ID
-          uri: lb://order-serivce # 匹配后路由地址
+          uri: lb://order-service # 匹配后路由地址
           predicates: # 断言, 路径相匹配的进行路由
-            - Path=/orders/**
+            - Path=/order-service/**
+          filters:
+            - StripPrefix=1
 
 # 暴露端点
 management:
